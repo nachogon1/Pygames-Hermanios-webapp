@@ -3,15 +3,14 @@ In this project we present an arena type videogame only in python, moreover pyga
 
 ## Running the videogame [Via python].
   - Clone the repository
-  - In server.py add the desired ip for the server
-  - In network.py add the server ip
+  - In constants.py add the desired ip for the server
   - In a terminal run:
   ```python
     python server.py
   ```
   - In a new terminal where the server is run client_enviroment.py
   ```python
-    python client_enviroment.py
+    python client_environment.py
   ```
   - In a new terminal run client.py to initialize the client:
   ```python
