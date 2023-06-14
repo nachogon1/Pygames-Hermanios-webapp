@@ -1,10 +1,10 @@
 import pygame as pg
-from src.network import Network
-import environment
+from .network import Network
+from .environment import rect_obstacle
 
 def main():
     run = True
-    border_rect = environment.rect_obstacle(150, 150)
+    border_rect = rect_obstacle(150, 150)
 
     all_sprites = pg.sprite.Group()
     all_sprites.add(border_rect)

@@ -1,7 +1,7 @@
 import socket
 from _thread import *
 
-from src.constants import SERVER_IP
+from .constants import SERVER_IP
 
 server_ip = SERVER_IP
 

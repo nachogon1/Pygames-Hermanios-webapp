@@ -1,7 +1,7 @@
+import os
 import socket
 
-from src.constants import SERVER_IP
-
+from .constants import SERVER_IP
 
 class Network:
     def __init__(self):
