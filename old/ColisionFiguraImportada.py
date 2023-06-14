@@ -6,7 +6,7 @@ pg.init()
 class char(pg.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pg.image.load("espada2.png")
+        self.image = pg.image.load("imagenes/espada2.png")
         self.image = pg.transform.smoothscale(self.image, (50, 50))
         self.rect = self.image.get_rect(center=(250, 250))
         self.mask = pg.mask.from_surface(self.image)

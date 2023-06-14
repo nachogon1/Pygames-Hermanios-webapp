@@ -6,12 +6,12 @@ pg.init()
 class surf1000x1000(pg.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pg.image.load("crowdcir.png")
+        self.image = pg.image.load("imagenes/crowdcir.png")
         self.image = pg.transform.scale(self.image, (1000, 1000))
         pg.gfxdraw.aacircle(self.image, 500, 500, 450, BLACK)
         pg.gfxdraw.filled_circle(self.image, 500, 500, 450, BLACK)
         self.image.set_colorkey(BLACK)
-        pg.image.save(self.image,"crowdcirfixed.png")
+        pg.image.save(self.image,"imagenes/crowdcirfixed.png")
 
 
 class superficie(pg.sprite.Sprite):
@@ -76,7 +76,7 @@ circulo4.set_colorkey(WHITE)
 '''
 espectadores = pg.Surface((1000,1000))
 espectadores.fill(WHITE)
-espectadores = pg.image.load("crowdcir.png")
+espectadores = pg.image.load("imagenes/crowdcir.png")
 espectadores = pg.transform.scale(espectadores, (1000, 1000))
 pg.gfxdraw.aacircle(espectadores, 500, 500, 450, (62,39,35))
 pg.gfxdraw.filled_circle(espectadores, 500, 500, 450, (62,39,35))
@@ -99,15 +99,15 @@ pg.gfxdraw.filled_circle(paredsurf, 500, 500, 350, BLACK)
 paredsurf.set_colorkey(WHITE)
 pg.image.save(paredsurf, "MURO.png")'''
 
-coliseo = pg.image.load("ColiseoFinal.png")
+coliseo = pg.image.load("imagenes/ColiseoFinal.png")
 coliseo = pg.transform.scale(coliseo, (1000, 1000))
 coliseo.set_colorkey(BLACK)
-pg.image.save(coliseo, "COLISEO.png")
+pg.image.save(coliseo, "imagenes/COLISEO.png")
 
-espada = pg.image.load("espada.png")
+espada = pg.image.load("imagenes/espada.png")
 espada2 = pg.transform.scale(espada, (50, 50))
 
-espada3 = pg.image.load("espada2.png")
+espada3 = pg.image.load("imagenes/espada2.png")
 espada4 = pg.transform.smoothscale(espada3, (50, 50))
 
 clock = pg.time.Clock()

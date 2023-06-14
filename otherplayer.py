@@ -1,5 +1,6 @@
 import pygame as pg
-import variables as vars
+from src import variables as vars
+
 
 class otherbody(pg.sprite.Sprite):
     def __init__(
@@ -23,7 +24,7 @@ class otherbody(pg.sprite.Sprite):
         self.y = y
         self.playerx = playerx
         self.playery = playery
-        self.body_image = pg.image.load("HELMET.png")
+        self.body_image = pg.image.load("imagenes/HELMET.png")
         self.image = pg.Surface((vars.BODY_IMG_WIDTH, vars.BODY_IMG_HEIGHT))
         self.image.blit(self.body_image, (0,0))
         self.rect = self.image.get_rect(
@@ -90,8 +91,8 @@ class otherbody(pg.sprite.Sprite):
     class othersword(pg.sprite.Sprite):
         def __init__(self, body):
             super().__init__()
-            self.sword_image = pg.image.load("SWORD.png")
-            self.sword_image_gir = pg.image.load("SWORD_GIR.png")
+            self.sword_image = pg.image.load("imagenes/SWORD.png")
+            self.sword_image_gir = pg.image.load("imagenes/SWORD_GIR.png")
             self.image = pg.Surface((vars.SWORD_IMG_WIDTH, vars.SWORD_IMG_HEIGHT))
             self.image.blit(self.sword_image, (vars.BODY_IMG_WIDTH - vars.HAND_RADIO - int(vars.SWORD_WIDTH / 2), int(vars.SWORD_IMG_HEIGHT / 2) - (vars.SWORD_HEIGHT + int(vars.BODY_IMG_HEIGHT / 2) - vars.HAND_RADIO)))
             self.rect = self.image.get_rect(center=(body.rect.center))

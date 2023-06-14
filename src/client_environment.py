@@ -1,5 +1,5 @@
 import pygame as pg
-from network import Network
+from src.network import Network
 import environment
 
 def main():

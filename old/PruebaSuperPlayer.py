@@ -1,5 +1,5 @@
 import pygame as pg
-from SuperPlayer import body
+from src.SuperPlayer import body
 
 pg.init()
 # OBLIGATORIO

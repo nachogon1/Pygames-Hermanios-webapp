@@ -1,7 +1,7 @@
 import pygame as pg
 import math
-from utils import is_swinging, sword_movement, sprite_collision
-import variables as vars
+from src.utils import is_swinging, sword_movement, sprite_collision
+import src.variables as vars
 
 ###########################################################
 # CLASE
@@ -12,7 +12,7 @@ class body(pg.sprite.Sprite):
         self.radio = vars.BODY_RADIO
         self.x = xinit
         self.y = yinit
-        self.body_image = pg.image.load("HELMET.png")
+        self.body_image = pg.image.load("imagenes/HELMET.png")
         self.image = pg.Surface((vars.BODY_IMG_WIDTH, vars.BODY_IMG_HEIGHT))
         self.image.blit(self.body_image, (0,0))
         self.rect = self.image.get_rect(center=(vars.HALF_SCREEN_X, vars.HALF_SCREEN_Y))
@@ -472,8 +472,8 @@ class body(pg.sprite.Sprite):
     class sword(pg.sprite.Sprite):
         def __init__(self, xinit, yinit):
             super().__init__()
-            self.sword_image = pg.image.load("SWORD.png")
-            self.sword_image_gir = pg.image.load("SWORD_GIR.png")
+            self.sword_image = pg.image.load("imagenes/SWORD.png")
+            self.sword_image_gir = pg.image.load("imagenes/SWORD_GIR.png")
             self.image = pg.Surface((vars.SWORD_IMG_WIDTH, vars.SWORD_IMG_HEIGHT))
             self.image.blit(self.sword_image, (vars.BODY_IMG_WIDTH - vars.HAND_RADIO - int(vars.SWORD_WIDTH / 2), int(vars.SWORD_IMG_HEIGHT / 2) - (vars.SWORD_HEIGHT + int(vars.BODY_IMG_HEIGHT / 2) - vars.HAND_RADIO)))
             self.rect = self.image.get_rect(center=(xinit, yinit))

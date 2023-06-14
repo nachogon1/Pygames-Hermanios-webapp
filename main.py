@@ -1,12 +1,64 @@
-import pygame as pg
-from network import Network
-from SuperPlayer import body
-from otherplayer import otherbody
-import otherenvironment as env
-from random import randrange
-from variables import *
+# import asyncio as asyncio
+# import pygame
+#
+# # screen = pygame.display.set_mode((600, 600))
+# screen_scale = 2
+# screen_size = [int(192*screen_scale), 4*int(27*screen_scale)]
+# mod = 75/screen_size[0]
+# screen = pygame.display.set_mode(screen_size, pygame.SCALED)
+# class Player(object):
+#     def __init__(self):
+#         self.rect = pygame.rect.Rect((64, 54, 16, 16))
+#
+#     def handle_keys(self):
+#         key = pygame.key.get_pressed()
+#         print(key)
+#         dist = 1
+#         if key[pygame.K_LEFT]:
+#             self.rect.move_ip(-1, 0)
+#         if key[pygame.K_RIGHT]:
+#             self.rect.move_ip(1, 0)
+#         if key[pygame.K_UP]:
+#             self.rect.move_ip(0, -1)
+#         if key[pygame.K_DOWN]:
+#             self.rect.move_ip(0, 1)
+#
+#     def draw(self, surface):
+#         pygame.draw.rect(surface, (0, 0, 128), self.rect)
+# pygame.init()
+#
+# player = Player()
+# clock = pygame.time.Clock()
+# async def main():
+#     while True:
+#         for event in pygame.event.get():
+#             if event.type == pygame.QUIT:
+#                 break
+#         screen.fill((255, 255, 255))
+#
+#         player.draw(screen)
+#         player.handle_keys()
+#         pygame.display.update()
+#         clock.tick(40)
+#         await asyncio.sleep(0)  # very important, and keep it 0 TODO why
+# if __name__ == "__main__":
+#     asyncio.run(main())
 
-coliseo = pg.image.load("COLISEO.png")
+import asyncio as asyncio
+import os
+
+import pygame as pg
+from src.network import Network
+from src.SuperPlayer import body
+from otherplayer import otherbody
+from src import otherenvironment as env
+from random import randrange
+from src.variables import *
+
+pg.init()
+sourceFileDir = os.path.dirname(os.path.abspath(__file__))
+filePath = os.path.join(sourceFileDir, "imagenes/COLISEO.png")
+coliseo = pg.image.load(filePath)
 
 win = pg.display.set_mode((WIDTH, HEIGHT))
 pg.display.set_caption("Client")

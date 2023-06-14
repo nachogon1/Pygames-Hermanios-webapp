@@ -1,6 +1,6 @@
 import socket
 
-from constants import SERVER_IP
+from src.constants import SERVER_IP
 
 
 class Network:
@@ -13,6 +13,7 @@ class Network:
 
     def connect(self):
         try:
+            print("socket", socket.gethostname())
             self.client.connect(self.addr)
         except:
             pass
