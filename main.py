@@ -64,7 +64,7 @@ win = pg.display.set_mode((WIDTH, HEIGHT))
 pg.display.set_caption("Client")
 
 
-def main():
+async def main():
     run = True
     p = body(randrange(151,829), randrange(151,829))
     all_sprites = pg.sprite.Group()
@@ -161,6 +161,7 @@ def main():
             all_sprites.draw(win)
 
         pg.display.update()
+        await asyncio.sleep(0)  # very important, and keep it 0 TODO why
 
 
-main()
+asyncio.run(main())
