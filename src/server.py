@@ -1,50 +1,89 @@
-import socket
-from _thread import *
+#!/usr/bin/env python
 
-from .constants import SERVER_IP
+import asyncio
+import threading
+from _thread import start_new_thread
 
-server_ip = SERVER_IP
+import websockets
 
-server = server_ip
-port = 5555
+# import socket
+# from .constants import SERVER_IP, PORT
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+# server_ip = SERVER_IP
 
-try:
-    s.bind((server, port))
-except socket.error as e:
-    str(e)
+# server = server_ip
+# port = PORT
 
-s.listen(2)
-print("Waiting for a connection, Server Started")
-
+# s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+#
+# try:
+#     s.bind((server, port))
+# except socket.error as e:
+#     str(e)
+#
+# s.listen(2)
+# print("Waiting for a connection, Server Started")
+players_list = [1,2,3,4,5,6]
 players = {}
-
-def threaded_client(conn, player):
-    global currentPlayer
-    reply = ""
+player_number = iter(players_list)
+async def handler(websocket):
+    player2 = next(player_number)
+    # player2 = 1
+    print("Connected player:", player2)
     while True:
-        try:
-            databit = conn.recv(2048)
-            data = eval(databit.decode("utf-8"))
-            players[player] = data
-            for p_index in players:
-                if not players[p_index]:
-                    players.pop(p_index)
-            reply = list(players.values())
-            conn.send(str.encode(str(reply)))
+        # try:
+        databit = await websocket.recv()
+        print("player", player2, "message", databit, "data", type(databit))
+        data = eval(databit)
+        print(f"data {data}")
+        players[player2] = data
+        # for p_index in players:
+        #     if not players[p_index]:
+        #         players.pop(p_index)
+        reply = list(players.values())
+        print(f"reply {reply}")
+        await websocket.send(str(reply))  # str or bytes check faster
+            # databit = conn.recv(2048)
+            # data = eval(databit.decode("utf-8"))  # TODO change this for json deserializer
+            # players[player] = data
+            # for p_index in players:
+            #     if not players[p_index]:
+            #         players.pop(p_index)
+            # reply = list(players.values())
+            # conn.send(str.encode(str(reply)))
+        #
+        # except:
+        #     break
 
-        except:
-            break
+    # print("Lost connection")
+    # conn.close()
 
-    print("Lost connection")
-    conn.close()
+async def main():
+    async with websockets.serve(handler, "", 8765):
+        await asyncio.Future()  # run forever
 
+# def between_callback():
+#     loop = asyncio.new_event_loop()
+#     asyncio.set_event_loop(loop)
+#     ws_server = websockets.serve(handler, '', 8765)
+#
+#     loop.run_until_complete(ws_server)
+#     loop.run_forever() # this is missing
+#     loop.close()
 
-global currentPlayer
-currentPlayer = 0
-while True:
-    conn, addr = s.accept()
-    print("Connected to:", addr)
-    start_new_thread(threaded_client, (conn, currentPlayer))
-    currentPlayer += 1
+if __name__ == "__main__":
+    # start_new_thread(between_callback, ())
+    # daemon server thread:
+    # server = threading.Thread(target=between_callback, daemon=True)
+    # server.start()
+    # client = threading.Thread(target=client)
+    # client.start()
+    # client.join()
+
+    # ws_server = websockets.serve(handler, "", 8765)
+    # loop = asyncio.get_event_loop()
+    # loop.run_until_complete(ws_server)
+    # loop.run_forever()
+    asyncio.run(main())
+    # start_new_thread(threaded_client, (conn, currentPlayer))
+

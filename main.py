@@ -1,48 +1,3 @@
-# import asyncio as asyncio
-# import pygame
-#
-# # screen = pygame.display.set_mode((600, 600))
-# screen_scale = 2
-# screen_size = [int(192*screen_scale), 4*int(27*screen_scale)]
-# mod = 75/screen_size[0]
-# screen = pygame.display.set_mode(screen_size, pygame.SCALED)
-# class Player(object):
-#     def __init__(self):
-#         self.rect = pygame.rect.Rect((64, 54, 16, 16))
-#
-#     def handle_keys(self):
-#         key = pygame.key.get_pressed()
-#         print(key)
-#         dist = 1
-#         if key[pygame.K_LEFT]:
-#             self.rect.move_ip(-1, 0)
-#         if key[pygame.K_RIGHT]:
-#             self.rect.move_ip(1, 0)
-#         if key[pygame.K_UP]:
-#             self.rect.move_ip(0, -1)
-#         if key[pygame.K_DOWN]:
-#             self.rect.move_ip(0, 1)
-#
-#     def draw(self, surface):
-#         pygame.draw.rect(surface, (0, 0, 128), self.rect)
-# pygame.init()
-#
-# player = Player()
-# clock = pygame.time.Clock()
-# async def main():
-#     while True:
-#         for event in pygame.event.get():
-#             if event.type == pygame.QUIT:
-#                 break
-#         screen.fill((255, 255, 255))
-#
-#         player.draw(screen)
-#         player.handle_keys()
-#         pygame.display.update()
-#         clock.tick(40)
-#         await asyncio.sleep(0)  # very important, and keep it 0 TODO why
-# if __name__ == "__main__":
-#     asyncio.run(main())
 
 import asyncio as asyncio
 import os
@@ -75,8 +30,10 @@ async def main():
     all_sprites.add(p.espada)
     all_sprites.add(p.livebar)
     all_sprites.add(p.energybar)
+    print("Before Network")
     n = Network()
-
+    await n.connect()
+    print("After Network")
     clock = pg.time.Clock()
 
     while run:
@@ -88,8 +45,8 @@ async def main():
                 n.client.close()
                 run = False
                 pg.quit()
-
-        pothers = n.send(
+        print("Before send")
+        pothers = await n.send(
             (
                 p.tipo,
                 p.x,
@@ -103,9 +60,12 @@ async def main():
                 p.blocking,
             )
         )
-
-        win.blit(coliseo,(-p.x + 250,-p.y + 250))
-
+        print("After send")
+        # pothers = []
+        win.blit(coliseo, (-p.x + 250, -p.y + 250))
+        # if not pothers:
+        #     pothers = []
+        print(len(pothers))
         for i in pothers:
             # Dibujamos los contrincantes
             if type(i) != list:
@@ -163,5 +123,5 @@ async def main():
         pg.display.update()
         await asyncio.sleep(0)  # very important, and keep it 0 TODO why
 
-
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())
