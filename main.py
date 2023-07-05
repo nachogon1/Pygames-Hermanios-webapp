@@ -65,7 +65,7 @@ async def main():
         win.blit(coliseo, (-p.x + 250, -p.y + 250))
         # if not pothers:
         #     pothers = []
-        print(len(pothers))
+        # print(len(pothers))
         for i in pothers:
             # Dibujamos los contrincantes
             if type(i) != list:
