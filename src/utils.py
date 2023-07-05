@@ -1,5 +1,5 @@
 import pygame as pg
-from src.variables import *
+from src.variables_slow import *
 
 def is_swinging(self):
     return self.swingleft or self.swingright or self.slashleft or self.slashright or self.backleft or self.backright or self.clashright or self.clashleft

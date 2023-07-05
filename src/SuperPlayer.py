@@ -1,7 +1,7 @@
 import pygame as pg
 import math
 from src.utils import is_swinging, sword_movement, sprite_collision
-import src.variables as vars
+import src.variables_slow as vars
 
 ###########################################################
 # CLASE

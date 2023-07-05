@@ -1,4 +1,5 @@
 # import os
+import ast
 import asyncio
 import platform
 # import socket
@@ -39,7 +40,7 @@ window.socket.onerror = (error) => {
 RECEIVE_DATA = """
 // Event handler for receiving messages from the server
 window.socket.onmessage = (event) => {
-  console.log('Received message:', event.data);
+  // console.log('Received message:', event.data);
   // add wait or event listener
   window.message = event.data
 };
@@ -70,16 +71,16 @@ class Network:
         try:
             SOCKET_SEND = f"""
               // Send data to the server
-              console.log("testito testito")
-              console.log("testito {data}")
+              // console.log("testito testito")
+              // console.log("testito {data}")
               window.socket.send('{data}');
             """
             # self.client.send(str.encode(str(data)))
             platform.window.eval(SOCKET_SEND)
             platform.window.eval(RECEIVE_DATA)
-            await asyncio.sleep(0.01)
+            await asyncio.sleep(0.005)
             content = platform.window.message
             # print_js(content)
-            return eval(content)  # TODO fix this
+            return ast.literal_eval(content)  # TODO fix this
         except Exception as e:
             print_js(e)

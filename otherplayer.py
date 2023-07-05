@@ -1,5 +1,5 @@
 import pygame as pg
-from src import variables as vars
+from src import variables_slow as vars
 
 
 class otherbody(pg.sprite.Sprite):

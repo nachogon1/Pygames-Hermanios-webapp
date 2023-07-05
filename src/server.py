@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
 import asyncio
+import json
+import ast
 import threading
 from _thread import start_new_thread
 
@@ -23,7 +25,7 @@ import websockets
 #
 # s.listen(2)
 # print("Waiting for a connection, Server Started")
-players_list = [1,2,3,4,5,6]
+players_list = [1,2,3,4,5,6,7,8,9,10]
 players = {}
 player_number = iter(players_list)
 async def handler(websocket):
@@ -33,15 +35,15 @@ async def handler(websocket):
     while True:
         # try:
         databit = await websocket.recv()
-        print("player", player2, "message", databit, "data", type(databit))
-        data = eval(databit)
-        print(f"data {data}")
+        # print( "message", databit, "data", type(databit))
+        data = ast.literal_eval(databit)  # TODO add validator
+        # print(f"data {data}")
         players[player2] = data
-        # for p_index in players:
-        #     if not players[p_index]:
-        #         players.pop(p_index)
+        for p_index in players:
+            if not players[p_index]:
+                players.pop(p_index)
         reply = list(players.values())
-        print(f"reply {reply}")
+        # print(f"reply {reply}")
         await websocket.send(str(reply))  # str or bytes check faster
             # databit = conn.recv(2048)
             # data = eval(databit.decode("utf-8"))  # TODO change this for json deserializer

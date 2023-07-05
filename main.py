@@ -8,7 +8,7 @@ from src.SuperPlayer import body
 from otherplayer import otherbody
 from src import otherenvironment as env
 from random import randrange
-from src.variables import *
+from src.variables_slow import *
 
 pg.init()
 sourceFileDir = os.path.dirname(os.path.abspath(__file__))
@@ -45,7 +45,7 @@ async def main():
                 n.client.close()
                 run = False
                 pg.quit()
-        print("Before send")
+        # print("Before send")
         pothers = await n.send(
             (
                 p.tipo,
@@ -60,7 +60,7 @@ async def main():
                 p.blocking,
             )
         )
-        print("After send")
+        # print("After send")
         # pothers = []
         win.blit(coliseo, (-p.x + 250, -p.y + 250))
         # if not pothers:
