@@ -20,7 +20,7 @@ def print_js(*args, default=True):
         print(*args)
 
 SOCKET_CONNECTION = """
-const socket = new WebSocket('ws://192.168.0.222:8765');
+const socket = new WebSocket('ws://3.75.223.152:8765');
 window.socket = socket
 window.socket.onopen = () => {
   console.log('Socket connected');
@@ -80,7 +80,6 @@ class Network:
             platform.window.eval(RECEIVE_DATA)
             await asyncio.sleep(0.005)
             content = platform.window.message
-            # print_js(content)
             return ast.literal_eval(content)  # TODO fix this
         except Exception as e:
             print_js(e)
